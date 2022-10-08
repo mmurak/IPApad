@@ -82,7 +82,7 @@
             }
             addChar(ch) {
                 this.lineBuffer = this.lineBuffer.substring(0, this.ptr) + ch + this.lineBuffer.substring(this.ptr);
-                this.ptr++;
+                this.ptr+= ch.length;
                 this.display();
             }
             moveLeft() {
