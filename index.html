@@ -29,25 +29,26 @@
                 font-size: 200%;
             }
             @media screen and (max-width: 959px) {
-            }
-            @media screen and (max-width: 480px) {
+                .button {
+                    font-size: 120%;
+                }
             }
         </style>
     </head>
     <body>
         <pre id="displayArea"></pre>
-        <input type="button" id="leftMove" value="　◀　" onclick="editor.moveLeft();">
-        <input type="button" id="backspace" value="　Backspace　" onclick="editor.backspace();">
-        <input type="button" id="rightMove" value="　▶　" onclick="editor.moveRight();">
+        <input type="button" class="button" id="leftMove" value="　◀　" onclick="editor.moveLeft();">
+        <input type="button" class="button" id="backspace" value="　Backspace　" onclick="editor.backspace();">
+        <input type="button" class="button" id="rightMove" value="　▶　" onclick="editor.moveRight();">
         <br/>
-        <input type="button" id="space" value=" S P A C E " onclick="editor.space();">
-        <input type="button" id="copy" value="copy" onclick="editor.copy();">
-        <input type="button" id="allclear" value="AC" onclick="editor.reset();">
+        <input type="button" class="button" id="space" value=" S P A C E " onclick="editor.space();">
+        <input type="button" class="button" id="copy" value="copy" onclick="editor.copy();">
+        <input type="button" class="button" id="allclear" value="AC" onclick="editor.reset();">
         <br/>
         <canvas id="canvas"></canvas>
         <br/>
-        <input type="button" id="rollbackButton" disabled value="Rollback one stroke" onclick="rollbackStroke();">
-        <input type="button" id="clearButton" value="Clear canvas" onclick="clearCanvas();">
+        <input type="button" class="button" id="rollbackButton" disabled value="Rollback one stroke" onclick="rollbackStroke();">
+        <input type="button" class="button" id="clearButton" value="Clear canvas" onclick="clearCanvas();">
         <br/>
         <p id="candidatesArea"></p>
 
