@@ -1,0 +1,296 @@
+<html>
+    <head>
+        <title>IPA pad (Lite)</title>
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <style>
+            canvas {
+                outline: black 1px solid;
+            }
+            #candidatesArea {
+                font-family: 'Times New Roman', 'Lucida Sans Unicode', 'Arial Unicode MS', sans-serif;
+                font-size: 200%;
+            }
+            #candidatesArea a{
+                color: black;
+                text-decoration: none;
+                font-size: 120%;
+            }
+            #candidatesArea a:hover{
+                color: red;
+            }
+            #displayArea {
+                height: 30px;
+                font-family: 'Times New Roman', 'Lucida Sans Unicode', 'Arial Unicode MS', sans-serif;
+                font-size: 200%;
+            }
+            @media screen and (max-width: 959px) {
+            }
+            @media screen and (max-width: 480px) {
+            }
+        </style>
+    </head>
+    <body>
+        <pre id="displayArea"></pre>
+        <input type="button" id="leftMove" value="　◀　" onclick="editor.moveLeft();">
+        <input type="button" id="backspace" value="　Backspace　" onclick="editor.backspace();">
+        <input type="button" id="rightMove" value="　▶　" onclick="editor.moveRight();">
+        <br/>
+        <input type="button" id="space" value=" S P A C E " onclick="editor.space();">
+        <input type="button" id="copy" value="copy" onclick="editor.copy();">
+        <input type="button" id="allclear" value="AC" onclick="editor.reset();">
+        <br/>
+        <canvas id="canvas"></canvas>
+        <br/>
+        <input type="button" id="rollbackButton" disabled value="Rollback one stroke" onclick="rollbackStroke();">
+        <input type="button" id="clearButton" value="Clear canvas" onclick="clearCanvas();">
+        <br/>
+        <p id="candidatesArea"></p>
+
+        <script src="./minimal.js"></script>
+        <script src="./TinyRecogniser.js"></script>
+        <script>
+        class GlobalManager {
+            constructor() {
+                this.selArea = document.getElementById("candidatesArea");
+                this.displayArea = document.getElementById("displayArea");
+                this.rollbackButton = document.getElementById("rollbackButton");
+                this.canvas = document.getElementById("canvas");
+                this.ctx = this.canvas.getContext("2d");
+                this.ctx.lineWidth = 0.5;
+                this.w = 0;
+                this.h = 0;
+                this.halfW = 0;
+                this.halfH = 0;
+                this.imageArray = [];
+                this.isDrag = false;
+                this.lastX = null;
+                this.lastY = null;
+                this.strokePath = [];
+                this.aggregatedArea = [];
+                this.engine = new TinyRecogniser(minimalDict);
+            }
+        }
+        class TinyEditor {
+            constructor(obj) {
+                this.obj = obj;
+                this.lineBuffer = "";
+                this.ptr = 0;
+            }
+            display() {
+                this.obj.innerHTML = this.lineBuffer.substring(0, this.ptr) + "&#x2038;" + this.lineBuffer.substring(this.ptr);
+            }
+            addChar(ch) {
+                this.lineBuffer = this.lineBuffer.substring(0, this.ptr) + ch + this.lineBuffer.substring(this.ptr);
+                this.ptr++;
+                this.display();
+            }
+            moveLeft() {
+                if (this.ptr > 0) this.ptr--;
+                this.display();
+            }
+            moveRight() {
+                if (this.ptr < this.lineBuffer.length) this.ptr++;
+                this.display();
+            }
+            backspace() {
+                if (this.ptr == 0) return;
+                this.lineBuffer = this.lineBuffer.substring(0, this.ptr - 1) + this.lineBuffer.substring(this.ptr);
+                this.ptr--;
+                this.display();
+            }
+            space() {
+                this.lineBuffer = this.lineBuffer.substring(0, this.ptr) + " " + this.lineBuffer.substring(this.ptr);
+                this.ptr++;
+                this.display();
+            }
+            copy() {
+                if (navigator.clipboard) {
+                    navigator.clipboard.writeText(this.lineBuffer);
+                } else {
+                    alert("This browser does not support Clipboard API.");
+                }
+            }
+            reset() {
+                let answer = window.confirm("Erase them all?")
+                if (answer) {
+                    this.lineBuffer = "";
+                    this.ptr = 0;
+                    this.display();
+                }
+            }
+        }
+
+        let G = new GlobalManager();
+        if (window.innerWidth >= 960) {     // PC
+            G.canvas.width = G.w = 300;
+            G.canvas.height = G.h = 300;
+            G.halfW = G.halfH = 150;
+        } else {
+            G.canvas.width = G.w = Math.floor(window.innerWidth * 0.8);
+            G.canvas.height = G.h = Math.floor(window.innerWidth * 0.8);;
+            G.halfW = G.halfH = Math.floor(G.canvas.width / 2);
+        }
+        let editor = new TinyEditor(G.displayArea);
+        editor.display();
+        G.canvas.addEventListener("mousedown", (evt) => { dragStart(evt); });
+        G.canvas.addEventListener("mouseup", (evt) => { dragEnd(evt); });
+        G.canvas.addEventListener("mouseout", (evt) => { dragEnd(evt); });
+        G.canvas.addEventListener("mousemove", (evt) => { draw(fixedX(evt), fixedY(evt)); });
+        G.canvas.addEventListener("touchstart", (evt) => { touchStart(evt); });
+        G.canvas.addEventListener("touchend", (evt) => { touchEnd(evt); });
+        G.canvas.addEventListener("touchmove", (evt) => { touchMove(evt); });
+        clearCanvas();
+
+        function dragStart(evt) {
+            G.imageArray.push(G.ctx.getImageData(0, 0, G.w, G.h));
+            G.rollbackButton.disabled = false;
+            G.ctx.beginPath();
+            G.isDrag = true;
+            G.strokePath = [];
+            G.strokePath.push(whichQuadrant(fixedX(evt), fixedY(evt)));
+            draw(fixedX(evt), fixedY(evt));
+        }
+        function dragEnd(evt) {
+            if (!G.isDrag)  return;
+            G.ctx.closePath();
+            G.isDrag = false;
+            G.lastX = null;
+            G.lastY = null;
+            G.aggregatedArea.push(G.strokePath.join("") + ":");
+            let candidates = G.engine.getCandidates(G.aggregatedArea.join(""));
+            candidates.pop();
+            displayCandidates(candidates);
+        }
+
+        function touchStart(evt) {
+            evt.preventDefault();
+            G.imageArray.push(G.ctx.getImageData(0, 0, G.w, G.h));
+            G.rollbackButton.disabled = false;
+            G.ctx.beginPath();
+            G.isDrag = true;
+            G.strokePath = [];
+            let touchX = evt.changedTouches[0].pageX - G.canvas.getBoundingClientRect().left;
+            let touchY = evt.changedTouches[0].pageY - G.canvas.getBoundingClientRect().top;
+            G.strokePath.push(whichQuadrant(touchX, touchY));
+            draw(touchX, touchY);
+        }
+        function touchEnd(evt) {
+            G.ctx.closePath();
+            G.isDrag = false;
+            G.lastX = null;
+            G.lastY = null;
+            G.aggregatedArea.push(G.strokePath.join("") + ":");
+            let candidates = G.engine.getCandidates(G.aggregatedArea.join(""));
+            candidates.pop();
+            displayCandidates(candidates);
+        }
+        function touchMove(evt) {
+            let x = evt.changedTouches[0].pageX - G.canvas.getBoundingClientRect().left;
+            let y = evt.changedTouches[0].pageY - G.canvas.getBoundingClientRect().top;
+            draw(x, y);
+        }
+
+        function fixedX(evt) {
+            return evt.clientX - G.canvas.getBoundingClientRect().left;
+        }
+        function fixedY(evt) {
+            return evt.clientY - G.canvas.getBoundingClientRect().top;
+        }
+        function draw(x, y) {
+            if (!G.isDrag) return;
+                G.ctx.lineCap = "round";
+                G.ctx.lineJoin = "round";
+                G.ctx.strokeStyle = "blue";
+                G.ctx.lineWidth = 7;
+                if (G.lastX == null || G.lastY == null) {
+                    G.ctx.moveTo(x, y);
+                } else {
+                    G.ctx.moveTo(G.lastX, G.lastY);
+                }
+                G.ctx.lineTo(x, y);
+                G.ctx.stroke();
+                G.lastX = x;
+                G.lastY = y;
+                let quad = whichQuadrant(x, y);
+                if (quad != G.strokePath[G.strokePath.length - 1]) {
+                    G.strokePath.push(quad);
+                }
+        }
+
+        function whichQuadrant(x, y) {
+            if (x > G.halfW) {
+                if (y <= G.halfH) {
+                    return "A";
+                } else {
+                    return "D";
+                }
+            } else {
+                if (y <= G.halfH) {
+                    return "B";
+                } else {
+                    return "C";
+                }
+            }
+        }
+
+        function selected(dat) {
+            editor.addChar(dat);
+            G.selArea.innerHTML = "";
+            clearCanvas();
+        }
+
+        function displayCandidates(canList) {
+            let selections = "";
+            new Set(canList).forEach(function(elem) {
+                selections += '・<a href="javascript:selected(\'' + elem + '\');">' + elem + '</a><br/>';
+            });
+            G.selArea.innerHTML = selections;
+//            console.log(selections);
+        }
+
+        function register() {
+            G.storage.value += JSON.stringify(G.aggregatedArea) + ", ";
+            clearPaths();
+            cselector.nextColour();
+        }
+
+        // chores
+        function drawCrossHairs() {
+            G.ctx.beginPath();
+            G.ctx.strokeStyle = "black";
+            G.ctx.lineWidth = 0.5;
+            G.ctx.setLineDash([2, 2]);
+            G.ctx.moveTo(0, G.halfH);
+            G.ctx.lineTo(G.w, G.halfH);
+            G.ctx.moveTo(G.halfW, 0);
+            G.ctx.lineTo(G.halfW, G.h);
+            G.ctx.stroke();
+            G.ctx.setLineDash([]);
+        }
+        function clearPaths() {
+            G.strokePath = [];
+            G.aggregatedArea = [];
+        }
+        function clearCanvas() {
+            G.ctx.clearRect(0, 0, G.w, G.h);
+            drawCrossHairs();
+            clearPaths();
+            displayCandidates([]);
+        }
+        function rollbackStroke() {
+            if (G.imageArray.length > 0) {
+                let image = G.imageArray.pop();
+                G.ctx.putImageData(image, 0, 0);
+                G.aggregatedArea.pop();
+                let candidates = G.engine.getCandidates(G.aggregatedArea.join(""));
+                candidates.pop();
+                if (G.imageArray.length <= 0) {
+                    G.rollbackButton.disabled = true;
+                }
+                displayCandidates(candidates);
+            }
+        }
+        </script>
+    </body>
+</html>
