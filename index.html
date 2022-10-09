@@ -84,7 +84,7 @@
                 this.ptr = 0;
             }
             display() {
-                this.obj.innerHTML = this.lineBuffer.substring(0, this.ptr) + "&#x2038;" + this.lineBuffer.substring(this.ptr);
+                this.obj.innerHTML = this.lineBuffer.substring(0, this.ptr) + "<span style=\"color: #f00;\">&#x200b;&#x322;</span>" + this.lineBuffer.substring(this.ptr);
             }
             addChar(ch) {
                 this.lineBuffer = this.lineBuffer.substring(0, this.ptr) + ch + this.lineBuffer.substring(this.ptr);
