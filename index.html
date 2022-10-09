@@ -164,7 +164,6 @@
             G.lastY = null;
             G.aggregatedArea.push(G.strokePath.join("") + ":");
             let candidates = G.engine.getCandidates(G.aggregatedArea.join(""));
-            candidates.pop();
             displayCandidates(candidates);
         }
 
@@ -188,7 +187,6 @@
             G.lastY = null;
             G.aggregatedArea.push(G.strokePath.join("") + ":");
             let candidates = G.engine.getCandidates(G.aggregatedArea.join(""));
-            candidates.pop();
             displayCandidates(candidates);
         }
         function touchMove(evt) {
@@ -252,7 +250,6 @@
                 selections += '・<a href="javascript:selected(\'' + elem + '\');">' + elem + '</a><br/>';
             });
             G.selArea.innerHTML = selections;
-//            console.log(selections);
         }
 
         function register() {
@@ -290,7 +287,6 @@
                 G.ctx.putImageData(image, 0, 0);
                 G.aggregatedArea.pop();
                 let candidates = G.engine.getCandidates(G.aggregatedArea.join(""));
-                candidates.pop();
                 if (G.imageArray.length <= 0) {
                     G.rollbackButton.disabled = true;
                 }
