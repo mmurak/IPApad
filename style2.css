@@ -146,8 +146,14 @@
   #VandSSection img {
     height: 45%;
   }
+  #customizableKeypad{
+      width: 100%;
+  }
   #customDialogBoxContent{
     width: 80%;
+  }
+  #customizeTable{
+    font-size: 60%;
   }
 }
 @media screen and (max-width: 480px) {
@@ -166,6 +172,36 @@
   }
   #VandSSection img {
     height: 35%;
+  }
+  #customizableKeypad{
+      width: 100%;
+  }
+  #customDialogBoxContent{
+    width: 80%;
+  }
+  #customizeTable{
+    font-size: 60%;
+  }
+}
+@media screen and (max-width: 370px) {
+  .controls {
+    font-size: 100%;
+  }
+  .qcontrols {
+    font-size: 100%;
+  }
+  .qcontrols2 {
+    font-size: 100%;
+  }
+  #displayArea {
+    font-size: 100%;
+    width: 100%;
+  }
+  #VandSSection img {
+    height: 35%;
+  }
+  #customizableKeypad{
+      width: 100%;
   }
   #customDialogBoxContent{
     width: 80%;
