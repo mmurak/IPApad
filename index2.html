@@ -1,0 +1,337 @@
+<html>
+    <head>
+        <title>IPApad</title>
+        <link rel="shortcut icon" href="./Kiwi-bird-blue.png">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <link rel="stylesheet" href="style2.css">
+    </head>
+    <body>
+        <input type="text" id="displayArea" spellcheck="false"><br/>
+        <div id="firstLine">
+            <input type="button" class="qcontrols" value="Custom." onclick="customPadClick();">
+            <input type="button" class="controls" value="V.&Supra." onclick="vsClick();">
+            <input type="button" class="qcontrols2" value="AC" onclick="allclear();">
+        </div>
+        <div class="menu" id="secondLine">
+            <input type="button" class="controls" value="C. (Pul)" onclick="cpClick();">
+            <input type="button" class="controls" value="C. (!Pul) etc." onclick="cnpoClick();">
+        </div>
+        <div class="menu" id="thirdLine">
+            <input type="button" class="controls" value="Dia." onclick="diaClick();">
+            <input type="button" class="controls" value="T.&A." onclick="taClick();">
+        </div>
+        <br/>
+        <div id="VandSSection">
+            <img src="./images/vowels.png" usemap="#VowelsMap" alt="Vowels" />
+            <map name="VowelsMap">
+                <area shape="rect" coords="104,73,134,113" href="javascript:ss('i');" alt="i" />
+                <area shape="rect" coords="134,73,176,113" href="javascript:ss('y');" alt="y" />
+                <area shape="rect" coords="276,72,311,113" href="javascript:ss('ɨ');" alt="ɨ" />
+                <area shape="rect" coords="311,73,350,113" href="javascript:ss('ʉ');" alt="ʉ" />
+                <area shape="rect" coords="440,72,487,116" href="javascript:ss('ɯ');" alt="ɯ" />
+                <area shape="rect" coords="488,71,533,116" href="javascript:ss('u');" alt="u" />
+                <area shape="rect" coords="162,114,212,157" href="javascript:ss('ɪ');" alt="ɪ" />
+                <area shape="rect" coords="211,116,270,157" href="javascript:ss('ʏ');" alt="ʏ" />
+                <area shape="rect" coords="381,116,469,161" href="javascript:ss('ʊ');" alt="ʊ" />
+                <area shape="rect" coords="145,160,197,204" href="javascript:ss('e');" alt="e" />
+                <area shape="rect" coords="196,159,273,204" href="javascript:ss('ø');" alt="ø" />
+                <area shape="rect" coords="281,158,339,204" href="javascript:ss('ɘ');" alt="ɘ" />
+                <area shape="rect" coords="338,160,404,201" href="javascript:ss('ɵ');" alt="ɵ" />
+                <area shape="rect" coords="416,161,486,203" href="javascript:ss('ɤ');" alt="ɤ" />
+                <area shape="rect" coords="488,161,539,204" href="javascript:ss('o');" alt="o" />
+                <area shape="rect" coords="304,205,411,248" href="javascript:ss('ə');" alt="ə" />
+                <area shape="rect" coords="191,246,252,295" href="javascript:ss('ɛ');" alt="ɛ" />
+                <area shape="rect" coords="253,246,315,296" href="javascript:ss('œ');" alt="œ" />
+                <area shape="rect" coords="316,248,370,297" href="javascript:ss('ɜ');" alt="ɜ" />
+                <area shape="rect" coords="371,248,426,297" href="javascript:ss('ɞ');" alt="ɞ" />
+                <area shape="rect" coords="433,248,486,297" href="javascript:ss('ʌ');" alt="ʌ" />
+                <area shape="rect" coords="489,248,538,298" href="javascript:ss('ɔ');" alt="ɔ" />
+                <area shape="rect" coords="213,298,315,341" href="javascript:ss('æ');" alt="æ" />
+                <area shape="rect" coords="336,299,438,341" href="javascript:ss('ɐ');" alt="ɐ" />
+                <area shape="rect" coords="241,342,313,385" href="javascript:ss('a');" alt="a" />
+                <area shape="rect" coords="315,342,383,386" href="javascript:ss('ɶ');" alt="ɶ" />
+                <area shape="rect" coords="437,342,486,387" href="javascript:ss('ɑ');" alt="ɑ" />
+                <area shape="rect" coords="488,341,535,389" href="javascript:ss('ɒ');" alt="ɒ" />
+            </map>
+
+            <br/>
+
+            <img src="./images/sSeg.png" usemap="#SSegMap" alt="" />
+            <map name="SSegMap">
+                <area shape="rect" coords="7,33,192,69" href="javascript:ss('ˈ');" alt="ˈ" />
+                <area shape="rect" coords="195,47,326,84" href="javascript:ss('ˌfoʊnəˈtɪʃən');" alt="ˌfoʊnəˈtɪʃən" />
+                <area shape="rect" coords="8,75,193,104" href="javascript:ss('ˌ');" alt="ˌ" />
+                <area shape="rect" coords="7,109,146,138" href="javascript:ss('ː');" alt="ː" />
+                <area shape="rect" coords="152,108,209,140" href="javascript:ss('eː');" alt="eː" />
+                <area shape="rect" coords="7,143,147,172" href="javascript:ss('ˑ');" alt="ˑ" />
+                <area shape="rect" coords="153,143,206,173" href="javascript:ss('eˑ');" alt="eˑ" />
+                <area shape="rect" coords="6,176,154,209" href="javascript:ss('&#x306;');" alt="&#x306;" />
+                <area shape="rect" coords="157,176,205,211" href="javascript:ss('ĕ');" alt="ĕ" />
+                <area shape="rect" coords="7,213,218,249" href="javascript:ss('|');" alt="|" />
+                <area shape="rect" coords="7,250,273,288" href="javascript:ss('‖');" alt="‖" />
+                <area shape="rect" coords="7,291,189,320" href="javascript:ss('.');" alt="." />
+                <area shape="rect" coords="193,291,276,318" href="javascript:ss('ɹi.ækt');" alt="ɹi.ækt" />
+                <area shape="rect" coords="9,327,299,357" href="javascript:ss('&#x203f;');" alt="&#x203f;" />
+            </map>
+        </div>
+
+        <div id="CPulmonSection">
+            <img src="./images/cPulmonL.jpg" usemap="#CPulmonLMap" alt="" />
+            <map name="CPulmonLMap">
+                <area shape="rect" coords="130,80,170,116" href="javascript:ss('p');" alt="p" />
+                <area shape="rect" coords="171,77,212,118" href="javascript:ss('b');" alt="b" />
+                <area shape="rect" coords="304,79,424,118" href="javascript:ss('t');" alt="t" />
+                <area shape="rect" coords="425,80,554,117" href="javascript:ss('d');" alt="d" />
+                <area shape="rect" coords="131,119,209,155" href="javascript:ss('m');" alt="m" />
+                <area shape="rect" coords="213,117,305,154" href="javascript:ss('ɱ');" alt="ɱ" />
+                <area shape="rect" coords="306,118,552,157" href="javascript:ss('n');" alt="n" />
+                <area shape="rect" coords="131,156,212,196" href="javascript:ss('ʙ');" alt="ʙ" />
+                <area shape="rect" coords="305,155,552,195" href="javascript:ss('r');" alt="r" />
+                <area shape="rect" coords="212,196,306,232" href="javascript:ss('ⱱ');" alt="ⱱ" />
+                <area shape="rect" coords="306,196,553,232" href="javascript:ss('ɾ');" alt="ɾ" />
+                <area shape="rect" coords="132,233,169,270" href="javascript:ss('ɸ');" alt="ɸ" />
+                <area shape="rect" coords="169,235,212,271" href="javascript:ss('β');" alt="β" />
+                <area shape="rect" coords="212,234,257,273" href="javascript:ss('f');" alt="f" />
+                <area shape="rect" coords="258,234,304,273" href="javascript:ss('v');" alt="v" />
+                <area shape="rect" coords="305,234,345,272" href="javascript:ss('θ');" alt="θ" />
+                <area shape="rect" coords="346,234,386,272" href="javascript:ss('ð');" alt="ð" />
+                <area shape="rect" coords="387,231,425,272" href="javascript:ss('s');" alt="s" />
+                <area shape="rect" coords="423,233,459,273" href="javascript:ss('z');" alt="z" />
+                <area shape="rect" coords="460,235,506,271" href="javascript:ss('ʃ');" alt="ʃ" />
+                <area shape="rect" coords="507,234,552,271" href="javascript:ss('ʒ');" alt="ʒ" />
+                <area shape="rect" coords="305,273,418,311" href="javascript:ss('ɬ');" alt="ɬ" />
+                <area shape="rect" coords="420,271,553,312" href="javascript:ss('ɮ');" alt="ɮ" />
+                <area shape="rect" coords="209,309,305,350" href="javascript:ss('ʋ');" alt="ʋ" />
+                <area shape="rect" coords="306,311,555,347" href="javascript:ss('ɹ');" alt="ɹ" />
+                <area shape="rect" coords="305,349,554,389" href="javascript:ss('l');" alt="l" />
+            </map>
+
+            <br/>
+
+            <img src="./images/cPulmonR.jpg" usemap="#CPulmonRMap" alt="" />
+            <map name="CPulmonRMap">
+                <area shape="rect" coords="134,49,173,86" href="javascript:ss('ʈ');" alt="ʈ" />
+                <area shape="rect" coords="174,50,215,87" href="javascript:ss('ɖ');" alt="ɖ" />
+                <area shape="rect" coords="215,50,255,87" href="javascript:ss('c');" alt="c" />
+                <area shape="rect" coords="255,50,297,87" href="javascript:ss('ɟ');" alt="ɟ" />
+                <area shape="rect" coords="297,50,338,86" href="javascript:ss('k');" alt="k" />
+                <area shape="rect" coords="337,50,378,87" href="javascript:ss('ɡ');" alt="ɡ" />
+                <area shape="rect" coords="377,49,418,86" href="javascript:ss('q');" alt="q" />
+                <area shape="rect" coords="416,49,458,88" href="javascript:ss('ɢ');" alt="ɢ" />
+                <area shape="rect" coords="551,49,593,87" href="javascript:ss('ʔ');" alt="ʔ" />
+                <area shape="rect" coords="135,88,215,127" href="javascript:ss('ɳ');" alt="ɳ" />
+                <area shape="rect" coords="216,88,296,126" href="javascript:ss('ɲ');" alt="ɲ" />
+                <area shape="rect" coords="296,88,378,127" href="javascript:ss('ŋ');" alt="ŋ" />
+                <area shape="rect" coords="378,88,458,126" href="javascript:ss('ɴ');" alt="ɴ" />
+                <area shape="rect" coords="377,126,458,166" href="javascript:ss('ʀ');" alt="ʀ" />
+                <area shape="rect" coords="135,164,216,203" href="javascript:ss('ɽ');" alt="ɽ" />
+                <area shape="rect" coords="135,204,175,240" href="javascript:ss('ʂ');" alt="ʂ" />
+                <area shape="rect" coords="176,203,216,242" href="javascript:ss('ʐ');" alt="ʐ" />
+                <area shape="rect" coords="215,204,256,243" href="javascript:ss('ç');" alt="ç" />
+                <area shape="rect" coords="257,203,297,242" href="javascript:ss('ʝ');" alt="ʝ" />
+                <area shape="rect" coords="296,203,337,243" href="javascript:ss('x');" alt="x" />
+                <area shape="rect" coords="337,202,377,242" href="javascript:ss('ɣ');" alt="ɣ" />
+                <area shape="rect" coords="376,203,418,243" href="javascript:ss('χ');" alt="χ" />
+                <area shape="rect" coords="419,203,458,242" href="javascript:ss('ʁ');" alt="ʁ" />
+                <area shape="rect" coords="458,203,506,242" href="javascript:ss('ħ');" alt="ħ" />
+                <area shape="rect" coords="506,203,552,242" href="javascript:ss('ʕ');" alt="ʕ" />
+                <area shape="rect" coords="551,203,594,242" href="javascript:ss('h');" alt="h" />
+                <area shape="rect" coords="595,204,631,241" href="javascript:ss('ɦ');" alt="ɦ" />
+                <area shape="rect" coords="135,281,216,319" href="javascript:ss('ɻ');" alt="ɻ" />
+                <area shape="rect" coords="216,281,295,318" href="javascript:ss('j');" alt="j" />
+                <area shape="rect" coords="297,281,377,319" href="javascript:ss('ɰ');" alt="ɰ" />
+                <area shape="rect" coords="135,319,216,359" href="javascript:ss('ɭ');" alt="ɭ" />
+                <area shape="rect" coords="216,319,297,359" href="javascript:ss('ʎ');" alt="ʎ" />
+                <area shape="rect" coords="296,319,378,359" href="javascript:ss('ʟ');" alt="ʟ" />
+            </map>
+
+        </div>
+
+        <div id="CNPulmonAndOSection">
+            <img src="./images/cNonPulmon.png" usemap="#CNPulmonMap" alt="" />
+            <map name="CNPulmonMap">
+                <area shape="rect" coords="18,77,185,113" href="javascript:ss('ʘ');" alt="ʘ" />
+                <area shape="rect" coords="187,78,352,113" href="javascript:ss('ɓ');" alt="ɓ" />
+                <area shape="rect" coords="358,78,525,114" href="javascript:ss('ʼ');" alt="ʼ" />
+                <area shape="rect" coords="18,115,185,152" href="javascript:ss('ǀ');" alt="ǀ" />
+                <area shape="rect" coords="188,115,354,152" href="javascript:ss('ɗ');" alt="ɗ" />
+                <area shape="rect" coords="357,115,524,151" href="javascript:ss('pʼ');" alt="pʼ" />
+                <area shape="rect" coords="18,154,185,192" href="javascript:ss('ǃ');" alt="ǃ" />
+                <area shape="rect" coords="189,154,357,193" href="javascript:ss('ʄ');" alt="ʄ" />
+                <area shape="rect" coords="357,156,527,192" href="javascript:ss('tʼ');" alt="tʼ" />
+                <area shape="rect" coords="17,192,186,231" href="javascript:ss('ǂ');" alt="ǂ" />
+                <area shape="rect" coords="187,193,353,230" href="javascript:ss('ɠ');" alt="ɠ" />
+                <area shape="rect" coords="358,194,522,228" href="javascript:ss('kʼ');" alt="kʼ" />
+                <area shape="rect" coords="17,232,185,267" href="javascript:ss('ǁ');" alt="ǁ" />
+                <area shape="rect" coords="190,232,357,268" href="javascript:ss('ʛ');" alt="ʛ" />
+                <area shape="rect" coords="358,231,524,267" href="javascript:ss('sʼ');" alt="sʼ" />
+            </map>
+
+            <br/>
+
+            <img src="./images/oSyms.png" usemap="#OsymMap" alt="" />
+            <map name="OsymMap">
+                <area shape="rect" coords="7,38,265,66" href="javascript:ss('ʍ');" alt="ʍ" />
+                <area shape="rect" coords="280,40,303,66" href="javascript:ss('ɕ');" alt="ɕ" />
+                <area shape="rect" coords="305,40,327,68" href="javascript:ss('ʑ');" alt="ʑ" />
+                <area shape="rect" coords="7,73,268,103" href="javascript:ss('w');" alt="w" />
+                <area shape="rect" coords="289,68,519,105" href="javascript:ss('ɺ');" alt="ɺ" />
+                <area shape="rect" coords="9,111,273,144" href="javascript:ss('ɥ');" alt="ɥ" />
+                <area shape="rect" coords="280,105,423,143" href="javascript:ss('ɧ');" alt="ɧ" />
+                <area shape="rect" coords="423,103,449,147" href="javascript:ss('ʃ');" alt="ʃ" />
+                <area shape="rect" coords="483,102,509,145" href="javascript:ss('x');" alt="x" />
+                <area shape="rect" coords="8,148,260,177" href="javascript:ss('ʜ');" alt="ʜ" />
+                <area shape="rect" coords="9,179,260,213" href="javascript:ss('ʢ');" alt="ʢ" />
+                <area shape="rect" coords="9,213,194,248" href="javascript:ss('ʡ');" alt="ʡ" />
+                <area shape="rect" coords="481,215,506,252" href="javascript:ss('&#x35c;');" alt="&#x35c;" />
+                <area shape="rect" coords="505,216,531,252" href="javascript:ss('&#x361;');" alt="&#x361;" />
+            </map>
+
+        </div>
+
+        <div id="DiacriticSection">
+            <img src="./images/dia.png" usemap="#DiacriticsMap" alt="" />
+            <map name="DiacriticsMap">
+                <area shape="rect" coords="642,3,673,42" href="javascript:ss('ŋ̊');" alt="ŋ̊" />
+                <area shape="rect" coords="21,42,159,81" href="javascript:ss('&#x30a;');" alt="&#x30a;" />
+                <area shape="rect" coords="168,44,205,80" href="javascript:ss('n̥');" alt="n̥" />
+                <area shape="rect" coords="208,44,236,82" href="javascript:ss('d̥');" alt="d̥" />
+                <area shape="rect" coords="249,46,399,79" href="javascript:ss('&#x324;');" alt="&#x324;" />
+                <area shape="rect" coords="405,44,439,79" href="javascript:ss('b̤');" alt="b̤" />
+                <area shape="rect" coords="446,44,482,79" href="javascript:ss('a̤');" alt="a̤" />
+                <area shape="rect" coords="497,45,615,79" href="javascript:ss('&#x32a;');" alt="&#x32a;" />
+                <area shape="rect" coords="636,46,674,79" href="javascript:ss('t̪');" alt="t̪" />
+                <area shape="rect" coords="677,45,709,80" href="javascript:ss('d̪');" alt="d̪" />
+                <area shape="rect" coords="22,84,160,119" href="javascript:ss('&#x32c;');" alt="&#x32c;" />
+                <area shape="rect" coords="167,85,202,118" href="javascript:ss('s̬');" alt="s̬" />
+                <area shape="rect" coords="208,86,236,118" href="javascript:ss('t̬');" alt="t̬" />
+                <area shape="rect" coords="249,83,396,117" href="javascript:ss('&#x330;');" alt="&#x330;" />
+                <area shape="rect" coords="403,82,436,118" href="javascript:ss('b̰');" alt="b̰" />
+                <area shape="rect" coords="448,84,481,117" href="javascript:ss('a̰');" alt="a̰" />
+                <area shape="rect" coords="497,83,615,118" href="javascript:ss('&#x33a;');" alt="&#x33a;" />
+                <area shape="rect" coords="636,84,672,117" href="javascript:ss('t̺');" alt="t̺" />
+                <area shape="rect" coords="676,84,708,117" href="javascript:ss('d̺');" alt="d̺" />
+                <area shape="rect" coords="22,120,157,155" href="javascript:ss('&#x2b0;');" alt="&#x2b0;" />
+                <area shape="rect" coords="169,120,208,154" href="javascript:ss('tʰ');" alt="tʰ" />
+                <area shape="rect" coords="209,121,243,153" href="javascript:ss('dʰ');" alt="dʰ" />
+                <area shape="rect" coords="251,122,397,155" href="javascript:ss('&#x33c;');" alt="&#x33c;" />
+                <area shape="rect" coords="403,122,439,157" href="javascript:ss('t̼');" alt="t̼" />
+                <area shape="rect" coords="448,122,482,157" href="javascript:ss('d̼');" alt="d̼" />
+                <area shape="rect" coords="498,122,614,157" href="javascript:ss('&#x33b;');" alt="&#x33b;" />
+                <area shape="rect" coords="639,121,672,158" href="javascript:ss('t̻');" alt="t̻" />
+                <area shape="rect" coords="677,120,703,158" href="javascript:ss('d̻');" alt="d̻" />
+                <area shape="rect" coords="23,159,161,197" href="javascript:ss('&#x339;');" alt="&#x339;" />
+                <area shape="rect" coords="168,162,207,195" href="javascript:ss('ɔ̹');" alt="ɔ̹" />
+                <area shape="rect" coords="251,161,397,194" href="javascript:ss('&#x2b7;');" alt="&#x2b7;" />
+                <area shape="rect" coords="402,162,446,194" href="javascript:ss('tʷ');" alt="tʷ" />
+                <area shape="rect" coords="449,161,490,194" href="javascript:ss('dʷ');" alt="dʷ" />
+                <area shape="rect" coords="498,161,619,195" href="javascript:ss('&#x303;');" alt="&#x303;" />
+                <area shape="rect" coords="665,161,714,194" href="javascript:ss('ẽ');" alt="ẽ" />
+                <area shape="rect" coords="22,199,157,235" href="javascript:ss('&#x31c;');" alt="&#x31c;" />
+                <area shape="rect" coords="169,200,206,234" href="javascript:ss('ɔ̜');" alt="ɔ̜" />
+                <area shape="rect" coords="250,197,397,233" href="javascript:ss('&#x2b2;');" alt="&#x2b2;" />
+                <area shape="rect" coords="403,197,445,232" href="javascript:ss('tʲ');" alt="tʲ" />
+                <area shape="rect" coords="453,198,492,233" href="javascript:ss('dʲ');" alt="dʲ" />
+                <area shape="rect" coords="499,200,626,233" href="javascript:ss('&#x207f;');" alt="&#x207f;" />
+                <area shape="rect" coords="674,198,714,233" href="javascript:ss('dⁿ');" alt=dⁿ />
+                <area shape="rect" coords="22,239,158,273" href="javascript:ss('&#x31f;');" alt="&#x31f;" />
+                <area shape="rect" coords="169,239,210,271" href="javascript:ss('u̟');" alt="u̟" />
+                <area shape="rect" coords="250,236,395,271" href="javascript:ss('&#x2e0;');" alt="&#x2e0;" />
+                <area shape="rect" coords="402,237,446,273" href="javascript:ss('tˠ');" alt="tˠ" />
+                <area shape="rect" coords="452,238,491,272" href="javascript:ss('dˠ');" alt="dˠ" />
+                <area shape="rect" coords="496,236,639,272" href="javascript:ss('&#x2e1;');" alt="&#x2e1;" />
+                <area shape="rect" coords="670,237,715,272" href="javascript:ss('dˡ');" alt="dˡ" />
+                <area shape="rect" coords="22,275,156,310" href="javascript:ss('&#x320;');" alt="&#x320;" />
+                <area shape="rect" coords="167,277,211,311" href="javascript:ss('e̠');" alt="e̠" />
+                <area shape="rect" coords="250,275,396,310" href="javascript:ss('&#x2e4;');" alt="&#x2e4;" />
+                <area shape="rect" coords="403,276,446,310" href="javascript:ss('tˤ');" alt="tˤ" />
+                <area shape="rect" coords="451,275,491,311" href="javascript:ss('dˤ');" alt="dˤ" />
+                <area shape="rect" coords="496,276,665,311" href="javascript:ss('&#x31a;');" alt="&#x31a;" />
+                <area shape="rect" coords="673,275,713,312" href="javascript:ss('d̚');" alt="d̚" />
+                <area shape="rect" coords="22,315,156,349" href="javascript:ss('&#x308;');" alt="&#x308;" />
+                <area shape="rect" coords="169,315,209,348" href="javascript:ss('ë');" alt="ë" />
+                <area shape="rect" coords="250,314,487,348" href="javascript:ss('&#x334;');" alt="&#x334;" />
+                <area shape="rect" coords="495,314,532,347" href="javascript:ss('ɫ');" alt="ɫ" />
+                <area shape="rect" coords="22,353,164,389" href="javascript:ss('&#x33d;');" alt="&#x33d;" />
+                <area shape="rect" coords="168,353,210,389" href="javascript:ss('e̽');" alt="e̽" />
+                <area shape="rect" coords="250,353,381,390" href="javascript:ss('&#x31d;');" alt="&#x31d;" />
+                <area shape="rect" coords="398,354,441,390" href="javascript:ss('e̝');" alt="e̝" />
+                <area shape="rect" coords="450,353,478,390" href="javascript:ss('ɹ̝');" alt="ɹ̝" />
+                <area shape="rect" coords="21,392,152,429" href="javascript:ss('&#x329;');" alt="&#x329;" />
+                <area shape="rect" coords="166,394,210,428" href="javascript:ss('n̩');" alt="n̩" />
+                <area shape="rect" coords="251,392,365,431" href="javascript:ss('&#x31e;');" alt=&#x31e;" />
+                <area shape="rect" coords="404,393,438,428" href="javascript:ss('e̞');" alt="e̞" />
+                <area shape="rect" coords="451,391,475,429" href="javascript:ss('β̞');" alt="β̞" />
+                <area shape="rect" coords="22,433,153,467" href="javascript:ss('&#x32f;');" alt="&#x32f;" />
+                <area shape="rect" coords="167,432,208,466" href="javascript:ss('e̯');" alt="e̯" />
+                <area shape="rect" coords="250,432,445,468" href="javascript:ss('&#x318;');" alt="&#x318;" />
+                <area shape="rect" coords="447,432,484,467" href="javascript:ss('e̘');" alt="e̘" />
+                <area shape="rect" coords="21,469,152,506" href="javascript:ss('&#x2de;');" alt="&#x2de;" />
+                <area shape="rect" coords="172,468,205,507" href="javascript:ss('ɚ');" alt="ɚ" />
+                <area shape="rect" coords="209,469,243,506" href="javascript:ss('a˞');" alt="a˞" />
+                <area shape="rect" coords="251,469,447,505" href="javascript:ss('&#x319;');" alt="&#x319;" />
+                <area shape="rect" coords="448,469,482,507" href="javascript:ss('e̙');" alt="e̙" />
+            </map>
+        </div>
+
+        <div id="TandASection">
+            <img src="./images/tAndA.png" usemap="#TandAMap" alt="" />
+            <map name="TandAMap">
+                <area shape="rect" coords="17,56,51,93" href="javascript:ss('&#x30b;');" alt="&#x30b;" />
+                <area shape="rect" coords="67,56,98,93" href="javascript:ss('˥');" alt="˥" />
+                <area shape="rect" coords="169,59,202,93" href="javascript:ss('&#x30c;');" alt="&#x30c;" />
+                <area shape="rect" coords="220,60,251,90" href="javascript:ss('˩˥');" alt="˩˥" />
+                <area shape="rect" coords="18,95,49,124" href="javascript:ss('&#x301;');" alt="&#x301;" />
+                <area shape="rect" coords="66,95,96,123" href="javascript:ss('˦');" alt="˦" />
+                <area shape="rect" coords="168,95,203,125" href="javascript:ss('&#x302;');" alt="&#x302;" />
+                <area shape="rect" coords="219,92,250,124" href="javascript:ss('˥˩');" alt="˥˩" />
+                <area shape="rect" coords="17,128,51,158" href="javascript:ss('&#x304;');" alt="&#x304;" />
+                <area shape="rect" coords="67,128,95,159" href="javascript:ss('˧');" alt="˧" />
+                <area shape="rect" coords="169,127,204,156" href="javascript:ss('&#x1dc4;');" alt="&#x1dc4;" />
+                <area shape="rect" coords="219,128,248,157" href="javascript:ss('˦˥');" alt="˦˥" />
+                <area shape="rect" coords="17,161,53,189" href="javascript:ss('&#x300;');" alt="&#x300;" />
+                <area shape="rect" coords="66,161,94,190" href="javascript:ss('˨');" alt="˨" />
+                <area shape="rect" coords="169,159,204,190" href="javascript:ss('&#x1dc5;');" alt="&#x1dc5;" />
+                <area shape="rect" coords="219,161,248,190" href="javascript:ss('˩˨');" alt="˩˨" />
+                <area shape="rect" coords="18,191,49,223" href="javascript:ss('&#x30f;');" alt="&#x30f;" />
+                <area shape="rect" coords="65,193,94,222" href="javascript:ss('˩');" alt="˩" />
+                <area shape="rect" coords="170,191,206,223" href="javascript:ss('&#x1dc8;');" alt="&#x1dc8;" />
+                <area shape="rect" coords="219,193,248,224" href="javascript:ss('˧˦˧');" alt="˧˦˧" />
+                <area shape="rect" coords="22,224,126,253" href="javascript:ss('↓');" alt="↓" />
+                <area shape="rect" coords="170,226,291,257" href="javascript:ss('↗');" alt="↗" />
+                <area shape="rect" coords="24,255,125,286" href="javascript:ss('↑');" alt="↑" />
+                <area shape="rect" coords="170,258,291,286" href="javascript:ss('↘');" alt="↘" />
+            </map>
+        </div>
+
+        <div id="CustomPadSection">
+            <div style="float: right">
+                <input type="button" value="🔨" onclick="customize();"></input>
+            </div>
+            <div style="clear: both">
+                <table id="customizableKeypad" border="1">
+                </table>
+            </div>
+        </div>
+
+        <div id="customDialogBox">
+            <div id="customDialogBoxContent">
+                <table id="customizeTable" border="1">
+                </table>
+                <div style="float: right">
+                    <input type="button" value="Cancel" onclick="dialogCanceled();"></input>
+                    <input type="button" value="Copy customized URL" onclick="dialogDisplayCharm();"></input>
+                    <input type="button" value="Save" onclick="dialogSaved();"></input>
+                </div>
+                <div id="charmDisplayArea"></div>
+            </div>
+        </div>
+
+
+        <script src="./scripts/imageMapResizer.min.js"></script>
+        <script src="./scripts/ipaKeypad.js"></script>
+        <script>
+        <script>
+    </body>
+<html>
