@@ -23,6 +23,7 @@
 }
 #customizableKeypad{
   width: 100%;
+  table-layout: fixed;
   background-color:  #85CFB0;
 }
 #customDialogBox{
