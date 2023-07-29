@@ -265,7 +265,7 @@ function buildUpInternalLayout() {
 }
 
 function dialogDisplayCharm() {
-    let charm = location.pathname + "?kl=" + encodeURI(buildUpInternalLayout());
+    let charm = location.host + location.pathname + "?kl=" + encodeURI(buildUpInternalLayout());
     copyToClipboard(charm);
     G.charmDisplayArea.innerHTML = "Customized URL was copied to clipboard.";
 }
