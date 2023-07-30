@@ -1,0 +1,215 @@
+<html>
+    <head>
+        <title>IPApad</title>
+        <link rel="shortcut icon" href="./Kiwi-bird-blue.png">
+        <meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+        <style>
+header{
+  position: sticky;
+  top: 0;
+  padding: 5px;
+  background-color: #ffffff;
+  z-index: 100;
+}
+.chcontrols{
+  font-size: 150%;
+}
+.controls {
+  width: 48%;
+  alilgn: center;
+  background: #ccccff;
+  cursor: pointer;
+  font-size: 120%;
+}
+.controls:active {
+  box-shadow: inset 0 0 2px rgba(128, 128, 128, 0.1);
+  transform: translateY(2px);
+}
+#ssbox{
+  padding: 5px;
+}
+#spreadsheet{
+  width: 100%;
+}
+#dlgNewLayout{
+  position: fixed;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  display: none;
+  background-color:  #ffffff;
+  z-index: 100;
+}
+#dlgContent{
+  margin: 20% auto;
+  width: 60%;
+  padding: 2em;
+  box-shadow: 0 5px 8px 0 rgba(0,0,0,0.2),0 7px 20px 0 rgba(0,0,0,0.17);
+  animation-name: modalopen;
+  animation-duration: 0.5s;
+}
+@keyframes modalopen {
+  from {opacity: 0}
+  to {opacity: 1}
+}
+        </style>
+
+        <script src="https://bossanova.uk/jspreadsheet/v4/jexcel.js"></script>
+        <script src="https://jsuites.net/v4/jsuites.js"></script>
+        <link rel="stylesheet" href="https://jsuites.net/v4/jsuites.css" type="text/css" />
+        <link rel="stylesheet" href="https://bossanova.uk/jspreadsheet/v4/jexcel.css" type="text/css" />
+    </head>
+    <body>
+        <header>
+            <input type="button" class="controls" value="New Layout" onclick="newLayout();"></input>
+            <input type="button" class="controls" value="Import Layout" onclick="importLayout();"></input><br/>
+            <div>
+                <label for="outputArea" class="chcontrols">URL: </label>
+                <a id="outputArea" class="chcontrols" target="_blank">Here is the link.</a>
+            </div>
+            <input type="button" class="controls" value="Save Layout" onclick="saveLayout();"></input><br/>
+        </header>
+        <div id="ssbox">
+            <div id="spreadsheet"></div>
+        </div>
+
+<div id="dlgNewLayout">
+    <div id="dlgContent"">
+        <label for="colSize">Number of columns: </label><input type="number" id="colSize" value="10" min="1" max="100"></input><br/>
+        <label for="rowSize">Number of rowss: </label><input type="number" id="rowSize" value="6" min="1" max="100"></input><br/>
+        <input type="button" class="controls" value="Cancel" onclick="dlgCancel()"></input>
+        <input type="button" class="controls" value="OK" onclick="dlgOK()"></input>
+    </div>
+</div>
+
+<script>
+class GlobalManager {
+    constructor() {
+        this.url = "https://mmurak.github.io/IPApad/?kl=";
+        this.spreadsheet = document.getElementById("spreadsheet");
+        this.dlgNewLayout = document.getElementById("dlgNewLayout");
+        this.colSize = document.getElementById("colSize");
+        this.rowSize = document.getElementById("rowSize");
+        this.outputArea = document.getElementById("outputArea");
+        this.js = null;
+        this.uriBuffer = "";
+        this.parameter = "";
+    }
+}
+
+let G = new GlobalManager();
+
+function shouldStop() {
+    if (G.js != null) {
+        if (!confirm("Current table will be discarded.  OK?")) {
+            return true;
+        }
+        G.spreadsheet.innerHTML = "";
+    }
+    return false;
+}
+
+function newLayout() {
+    if (shouldStop()) {
+        return;
+    }
+    G.dlgNewLayout.style.display = "block";
+}
+
+function importLayout() {
+    if (shouldStop()) {
+        return;
+    }
+    let uri = prompt("Input parameter");
+    if ((uri == "") || (uri == null)) return;
+    uri = decodeURI(uri);
+    let data = [];
+    const line = uri.split("\u{02}");
+    for (l of line) {
+        let record = [];
+        const col = l.split("\u{01}")
+        for (c of col) {
+            record.push(c);
+        }
+        data.push(record);
+    }
+    createJSpreadsheet(data);
+    cellChanged();
+}
+
+function clipLastChar(str) {
+    return str.substring(0, str.length-1);
+}
+
+function makeURIparm() {
+    if (G.js == null) return;
+    let result = ""
+    let wholeData = G.js.getData();
+    for (line of wholeData) {
+        for (item of line) {
+//            item = (item == "") ? "-" : item;
+            result += item + "\u{01}"
+        }
+        result = clipLastChar(result);
+        result += "\u{02}";
+    }
+    result = clipLastChar(result);
+    let uri = encodeURI(result);
+    G.parameter = uri;
+    G.outputArea.href = G.url + uri;
+}
+
+function saveLayout() {
+    if (G.parameter == "") return;
+    const blob = new Blob([G.parameter],{type:"text/plain"});
+    const link = document.createElement("a");
+    link.href = URL.createObjectURL(blob);
+    link.download = "parameter.txt";
+    link.click();
+}
+
+function createJSpreadsheet(data) {
+    G.js = jspreadsheet(G.spreadsheet, {
+        data: data,
+        allowManualInsertColumn: false,
+        allowManualInsertRow: false,
+        onchange: cellChanged,
+    });
+}
+
+function cellChanged() {
+    let result = ""
+    let wholeData = G.js.getData();
+    for (line of wholeData) {
+        for (item of line) {
+            result += item + "\u{01}"
+        }
+        result = clipLastChar(result);
+        result += "\u{02}";
+    }
+    result = clipLastChar(result);
+    makeURIparm();
+}
+
+function dlgCancel() {
+    G.dlgNewLayout.style.display = "none";
+}
+
+function dlgOK() {
+    const noc = Number(colSize.value);
+    const nor = Number(rowSize.value);
+    let data = []
+    for (let i = 0; i < nor; i++) {
+        let aLine = [...Array(noc)].map(() => '');
+        data.push(aLine);
+    }
+    createJSpreadsheet(data);
+    G.dlgNewLayout.style.display = "none";
+}
+
+    </script>
+    </body>
+<html>
