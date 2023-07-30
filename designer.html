@@ -177,6 +177,10 @@ function createJSpreadsheet(data) {
         allowManualInsertColumn: false,
         allowManualInsertRow: false,
         onchange: cellChanged,
+        ondeletecolumn: cellChanged,
+        oninsertcolumn: cellChanged,
+        ondeleterow: cellChanged,
+        oninsertrow: cellChanged,
     });
 }
 
