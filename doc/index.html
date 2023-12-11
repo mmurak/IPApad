@@ -1,0 +1,121 @@
+<html>
+<head>
+	<title>IPApad - Document</title>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" >
+	<meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no">
+	<link rel="shortcut icon" href="../Kiwi-bird-blue.png">
+	<style>
+.center{
+	text-align: center;
+}
+img{
+	border: 1px solid #000000;
+	width: 400px;
+	align: center;
+}
+@media screen and (max-width: 820px) {
+	img{
+		width: 400px;
+	}
+}
+@media screen and (max-width: 480px) {
+	img{
+		width: 100%;
+	}
+}
+@media screen and (max-width: 370px) {
+	img{
+		width: 100%;
+	}
+}
+	</style>
+</head>
+<body>
+
+<h1>IPApad利用マニュアル</h1>
+
+<h2>起動方法</h2>
+<p>　これはウェブアプリなので、インストールは不要です。<a href="https://mmurak.github.io/IPApad/" target="_blank">https://mmurak.github.io/IPApad/</a>にアクセスすると起動し、以下のような画面が表示されます。</p>
+
+<figure class="center">
+	<figcaption>図1： 起動時の画面（Custom.ペイン）</figcaption>
+	<img src="./img/fig-1.png">
+</figure>
+
+<h2>一般的な使い方</h2>
+
+<p>　起動直後には「Custom.」ペインが表示されます。このペイン上の国際音声記号（IPA）ボタンを押すと、画面上部のテキスト領域にIPAが入力されていくとともに、その内容がクリップボード内にもコピーされていきます（このため「選択してコピー」という操作は不要です）。</p>
+
+<p>　また、通常のキーボード（PCの場合はハードウェアキーボード、スマホやタブレットの場合はソフトウェアキーボード）から入力された文字もテキスト領域に書き込めます。</p>
+
+<p>　［AC］ボタンを押すとテキスト領域がクリアされます（ただしクリップボードの内容はクリアされません）。</p>
+
+<h2>ペイン切り替えボタン</h2>
+
+<p>　［V.&amp;Supra.］／［C.(Pul)］／［C.(!Pul) etc.］／［Dia］／［T.&amp;A.］の各ボタンは国際音声記号チャートの各セクションの画像を表示するものであり、各記号や用例をクリックしたり、タップすることでも該当記号を入力できます。各ボタンで表示されるセクションは以下の通りです。</p>
+
+<ul>
+<li>［V.&amp;Supra.］：母音と超分節的要素--Vowels &amp; Suprasegmentals</li>
+<li>［C.(Pul)］：子音（肺気流）--Consonants（Pulmonic）</li>
+<li>［C.(!Pul) etc.］：子音（非肺気流）とその他の記号--Consonants（Non-pulmonic）, Other Symbols</li>
+<li>［Dia］：補助記号--Diacritics</li>
+<li>［T.&amp;A.］：声調と語アクセント--Tones &amp; Word Accents</li>
+</ul>
+
+
+<h2>Custom.ペインのカスタマイズ</h2>
+
+<p>　Custom.ペインの［🔨］ボタンを使えば、同ペインの配列をカスタマイズすることができます。変更方法は以下の通りです。</p>
+
+<p>
+<ol>
+<li>［🔨］ボタンをクリック／タップすると以下の画面が表示されます。
+<figure class="center">
+	<figcaption>図2： カスタマイズ画面</figcaption>
+	<img src="./img/fig-2.jpg">
+</figure>
+</li>
+<li>各ボタンに対応する場所にあるテキスト領域を書き換えていきます。なお、Jones式発音記号の第一強勢（Acute Accent）は「AA」、第2強勢（Grave Accent）は「GA」と入力します。また、空白記号は「SP」と入力します。</li>
+<li>カスタマイズを中止するには［Cancel］ボタンを、適用するには［Save］ボタンをクリック／タップするとそのセッション限りで変更が反映されます。</li>
+<li>次回以降もその設定を使用したい場合には、［Copy customized URL］ボタンをクリックすると、カスタマイズ情報を埋め込んだURLがクリップボードにコピーされるので、そのアドレスをブックマークしておけば次回以降もカスタマイズした配列が利用できるようになります。</li>
+</ol>
+
+</p>
+
+<h2>Custom.ペインを初めからデザインする方法</h2>
+
+<p>　<a href="https://mmurak.github.io/IPApad/designer.html" target="_blank">配列デザイン用のプログラム</a>を使用すれば、配列の縦横のサイズ指定をするところからデザインすることができます。</p>
+
+<figure class="center">
+	<figcaption>図3： デザイン用プログラムの初期画面</figcaption>
+	<img src="./img/fig-3.jpg">
+</figure>
+
+<p>
+<ol>
+<li>［New Layout］ボタンをクリック／タップすると、以下のレイアウト指定画面が表示されるため、列と行のサイズを指定し、［OK］ボタンをクリック／タップします。
+<figure class="center">
+	<figcaption>図4： レイアウトサイズ指定画面</figcaption>
+	<img src="./img/fig-4.jpg">
+</figure>
+</li>
+<li>表計算アプリと同じ要領で記号を入力していきます。
+<figure class="center">
+	<figcaption>図5： 編集画面</figcaption>
+	<img src="./img/fig-5.jpg">
+</figure>
+</li>
+<li>編集中は適宜「Here is the link」リンクをクリック／タップすると、別タブでIPApadが開き、編集内容を確認することができます。
+<figure class="center">
+	<figcaption>図6： 編集画面（スペイン語&amp;マオリ語入力モード）</figcaption>
+	<img src="./img/fig-6.jpg">
+</figure>
+</li>
+</ol>
+</p>
+
+<p>※ 編集作業を中断する際には［Save Layout］ボタンをクリックしてください。これにより現在の状態を表す定義文字列がファイルに書き出されます。後の時点で作業を継続する際には、このファイルをオープンして内容をコピーし、［Import Layout］ボタンを押して表示される画面にペーストしてください。
+</p>
+
+</body>
+</html>
