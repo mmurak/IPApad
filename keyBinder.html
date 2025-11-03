@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>SmartPad Key binder</title>
+	<link rel="shortcut icon" href="./redKiwiBird.png">
+	<link rel="stylesheet" href="keyBinder.css">
+</head>
+<body>
+	<div class="main-container">
+		<div class="button-bar">
+			<button id="SmartIPABnd">設定サンプル</button>
+			<button id="OpenSmartPad">この設定でSmartPadを開く</button>
+			<hr>
+			<h3>KeyBinder（SmartPadの設定アプリ）の使い方</h3>
+			<ol>
+			<li>行頭の1文字が入力されると、該当行の以降の文字が候補として表示されるようになります（各候補は空白で区切ります）。</li>
+			<li>設定が完了したら、［この設定でSmartPadを開く］ボタンを押すとその設定に従ったSmartPadページが開きます。</li>
+			<li>そのSmartPadページをブックマークしておけば、いつでもその設定でSmartPadを利用できます。</li>
+			</ol>
+		</div>
+		<div class="textarea-wrapper">
+			<textarea id="Textarea" spellcheck="false" autocomplete="off" autocorrect="off"></textarea>
+		</div>
+	</div>
+<script src="./scripts/keyBinder.js"></script>
+</body>
+</html>

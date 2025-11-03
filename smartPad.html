@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+	<meta charset="UTF-8">
+	<title>SmartPad</title>
+	<link rel="shortcut icon" href="./blueKiwiBird.png">
+	<link rel="stylesheet" href="smartPad.css">
+</head>
+<body>
+	<div class="main-container">
+		<div class="button-bar">
+			<label class="switch-wrapper">
+				<input type="checkbox" id="AutoCopy" class="switch-input"checked/>
+				<span class="switch-slider"></span>
+				<span class="switch-label">Auto copy</span>
+			</label>
+			<button id="Copy" disabled>Copy</button>
+			　変換不要時はそのまま入力を続ける。変換要時は候補をクリック／タップまたはEnterを入力。
+		</div>
+		<div class="textarea-wrapper">
+			<div class="TextareaContainer">
+				<textarea id="Textarea" spellcheck="false" autocomplete="off" autocorrect="off"></textarea>
+				<select id="CandidatePopup" class="popup"></select>
+			</div>
+		</div>
+	</div>
+	<script src="./scripts/smartPad.js"></script>
+</body>
+</html>
