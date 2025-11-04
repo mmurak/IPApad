@@ -144,11 +144,10 @@ document.addEventListener("DOMContentLoaded", () => {
 		const lines = str.split("\n")
 		const rowNo = lines.length;
 		const colNo = lines[rowNo-1].length;
-
 		// y-axis
 		const textAreaStyle = window.getComputedStyle(G.textarea);
 		const lineHeight = parseFloat(textAreaStyle.lineHeight) || 24;
-		const topPosition = (rowNo * lineHeight) + G.textarea.offsetTop;
+		const topPosition = (rowNo * lineHeight) + G.textarea.offsetTop - G.textarea.scrollTop;
 
 		// x-axis
 		const tempCanvas = document.createElement("canvas");
