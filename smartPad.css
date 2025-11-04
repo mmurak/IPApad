@@ -45,20 +45,28 @@ html, body {
 	margin: 0;
 	padding: 0;
 	border: 1px solid #ccc;
+	border-radius: 8px;
 	background-color: white;
-	box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.1);
+	box-shadow: 3px 3px 7px rgba(0, 0, 0, 0.6);
 	z-index: 10;
-	overflow-y: auto;
+	width: auto;
+	height: auto;
+	overflow: hidden;
+	overflow-y: hidden;
+	box-sizing: border-box;
 	font-size: 36px;
 	font-family: "Times New Roman";
 }
-.popup option {
-	padding: 5px 10px;
-	width: 36pt.
-	cursor: pointer;
+.listCandidate {
+    display: block;
+    padding: 10px;
+    background-color: #ffffff;
+    cursor: pointer;
 }
-.popup option:checked {
-	background-color: #87cefa;
+.listCandidate:has(.hiddenCheckbox:checked) {
+    background-color: #e0f7ff;
+    border-left: 5px solid #007bff;
+    color: #000000;
 }
 .switch-wrapper {
 	display: inline-flex;
@@ -102,6 +110,24 @@ html, body {
 	font-size: 16px;
 	color: #374151;
 }
+
+.hiddenCheckbox {
+	position: absolute;
+	opacity: 0;
+	width: 0;
+	height: 0;
+	margin: 0;
+	padding: 0;
+	z-index: -1;
+}
+.listCandidate {
+    position: relative;
+    margin: 0;
+    padding: 10px;
+    cursor: pointer;
+    user-select: none;
+}
+
 @media screen and (max-width: 820px) {
 	#Textarea {
 		width: 100%;

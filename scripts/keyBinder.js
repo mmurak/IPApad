@@ -60,7 +60,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		const param = trimmedArr.join("\n");
 		const encodedParam = encodeURIComponent(param);
 		let url = window.location.href.replace("keyBinder.html", "smartPad.html");
-		window.open(url + "?reg=" + encodedParam, "SmartPad");
+		window.open(url + "?reg=" + encodedParam, "__blank");
 	});
 
 	G.textarea.focus();

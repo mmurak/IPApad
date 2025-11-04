@@ -8,6 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
 			this.popup = document.getElementById("CandidatePopup");
 			this.container = this.textarea.parentElement; // .TextareaContainer
 			this.master = {};
+			this.selectedIndex = 0;
 			const param = new URLSearchParams(window.location.search).get("reg");
 			if (param != null) {
 				const bindArray = param.split("\n");
@@ -25,23 +26,28 @@ document.addEventListener("DOMContentLoaded", () => {
 	G.container.addEventListener("keydown", (evt) => {
 		if (G.popup.style.display == "block") {
 			const eventCh = evt.key;
-			let idx = G.popup.selectedIndex;
+			let idx = G.selectedIndex;
 			switch (eventCh) {
 				case "ArrowUp" :
 					evt.preventDefault();
+					G.popup.children[G.selectedIndex].querySelector('.hiddenCheckbox').checked = false;
 					idx--;
 					if (idx < 0) idx = 0;
-					G.popup.selectedIndex = idx;
+					G.popup.children[idx].querySelector('.hiddenCheckbox').checked = true;
+					G.selectedIndex = idx;
 					break;
 				case "ArrowDown" :
 					evt.preventDefault();
+					G.popup.children[G.selectedIndex].querySelector('.hiddenCheckbox').checked = false;
 					idx++;
-					if (idx >= G.popup.length) idx = G.popup.length - 1;
-					G.popup.selectedIndex = idx;
+					if (idx >= G.popup.children.length) idx = G.popup.children.length - 1;
+					G.popup.children[idx].querySelector('.hiddenCheckbox').checked = true;
+					G.selectedIndex = idx;
 					break;
 				case "Enter" :
 					evt.preventDefault();
-					popupValueSelected();
+					const valsel = G.popup.children[G.selectedIndex].querySelector('.listCandidate').textContent;
+					popupValueSelected(valsel);
 					break;
 				default :
 					G.popup.style.display = "none";
@@ -72,7 +78,9 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	G.popup.addEventListener("click", (evt) => {
 		evt.preventDefault();
-		popupValueSelected();
+		const selectedLi = evt.target.closest('li');
+		const valsel = selectedLi.textContent;
+		popupValueSelected(valsel);
 	});
 
 	G.autoCopy.addEventListener("click", (evt) => {
@@ -90,12 +98,12 @@ document.addEventListener("DOMContentLoaded", () => {
 		G.textarea.focus();
 	});
 
-	function popupValueSelected() {
-		const valsel = G.popup[G.popup.selectedIndex].value;
+	function popupValueSelected(valsel) {
 		const pt = G.textarea.selectionStart;
 		G.textarea.value = G.textarea.value.substr(0, pt - 1) + valsel + G.textarea.value.substring(pt);
 		G.textarea.selectionStart = G.textarea.selectionEnd = pt + valsel.length - 1;
 		G.popup.style.display = "none";
+		G.textarea.focus();
 	}
 
 	function popupper(ch, cursorPos) {
@@ -105,15 +113,25 @@ document.addEventListener("DOMContentLoaded", () => {
 			const coord = getCoordinates(G.textarea.value, ch, cursorPos);
 			G.popup.innerHTML = "";
 			for (cand of candidates) {
-				const elem = document.createElement("option");
-				elem.value = cand;
-				elem.innerHTML = cand;
-				G.popup.appendChild(elem);
+				const elem = document.createElement("input");
+				elem.type = "checkbox";
+				elem.className = "hiddenCheckbox";
+				const lab = document.createElement("label");
+				lab.textContent = cand;
+				lab.appendChild(elem);
+				lab.className = "listCandidate";
+				const item = document.createElement("li");
+				item.appendChild(lab);
+				G.popup.appendChild(item);
 			}
-			G.popup.selectedIndex = 0;
+			G.selectedIndex = 0;
 			G.popup.size = candidates.length;
-			G.popup.style.top = `${coord[0]}px`;
+			const style = window.getComputedStyle(G.textarea);
+			const fontSize = parseFloat(style.getPropertyValue("font-size"));
+			G.popup.style.top = `${coord[0] + fontSize/6}px`;
 			G.popup.style.left = `${coord[1]}px`;
+			const cb = G.popup.children[0].querySelector('.hiddenCheckbox');
+			cb.checked = true;
 			G.popup.style.display = "block";
 		} else {
 			G.popup.style.display = "none";
