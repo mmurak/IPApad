@@ -40,13 +40,44 @@ document.addEventListener("DOMContentLoaded", () => {
 				"' ˑ ˈ",
 				"\\  ̏  ̀",
 			];
+			this.miniMaster = [
+				"a æ ʌ ɑ ɒ ə ɚ ɐ",
+				"b ",
+				"c ",
+				"d ʤ ð d̚ dʰ dˡ dⁿ d̪",
+				"e ə ɚ ɛ ɜ ɜ˞",
+				"f ",
+				"g ɡ",
+				"h ",
+				"i ɪ i",
+				"j ",
+				"k ",
+				"l l̩",
+				"m ɱ m̩",
+				"n ŋ n̩",
+				"o ɔ",
+				"p ",
+				"q ",
+				"r ɹ",
+				"s ʃ",
+				"t ʧ θ t̚ tʰ tˡ tⁿ t̪",
+				"u ʊ ɯ",
+				"v ",
+				"w ",
+				"x  ʔ  ̪ ",
+				"y ",
+				"z ʒ",
+				", ˈ ˌ ː  ́  ̀",
+				". / [ ]",
+			];
 		}
 	}
 	const G = new GlobalManager();
 
 	G.smartIPABnd.addEventListener("click", (evt) => {
 		G.textarea.value = "";
-		for (item of G.defaultMaster) {
+		const master = (evt.shiftKey) ? G.defaultMaster : G.miniMaster;
+		for (item of master) {
 			const bindings = item.split("");
 			G.textarea.value += item + "\n";
 		}

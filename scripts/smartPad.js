@@ -108,7 +108,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
 	function popupper(ch, cursorPos) {
 		if (G.popup.style.display == "block") return;
-		if (ch in G.master) {
+		if ((ch in G.master) && (G.master[ch].length > 0)) {
 			const candidates = G.master[ch];
 			const coord = getCoordinates(G.textarea.value, ch, cursorPos);
 			G.popup.innerHTML = "";
