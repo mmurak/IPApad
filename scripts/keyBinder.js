@@ -39,6 +39,8 @@ document.addEventListener("DOMContentLoaded", () => {
 				"/  ̋  ́",
 				"' ˑ ˈ",
 				"\\  ̏  ̀",
+				"_  ̥  ̯  ̬  ̹  ̜  ̟  ͜",
+				"^ ̊ ˞ ̃ ̈ ̽ ͡",
 			];
 			this.miniMaster = [
 				"a æ ʌ ɑ ɒ ɐ",
