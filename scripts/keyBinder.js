@@ -77,7 +77,7 @@ document.addEventListener("DOMContentLoaded", () => {
 				"/ \\ ÷",
 				"' ˈ",
 				", ˌ",
-				"a ā ä",
+				"a ā ä ȧ",
 				"e ə ᵊ ē",
 				"i ī",
 				"o ō ȯ œ",
