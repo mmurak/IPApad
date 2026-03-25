@@ -4,6 +4,7 @@ document.addEventListener("DOMContentLoaded", () => {
 		constructor() {
 			this.textarea = document.getElementById("Textarea");
 			this.smartIPABnd = document.getElementById("SmartIPABnd");
+			this.smartIPABndMW = document.getElementById("SmartIPABndMW");
 			this.openSmartPad = document.getElementById("OpenSmartPad");
 			this.defaultMaster = [
 				"a ɑ ɒ ɐ æ α",
@@ -72,6 +73,20 @@ document.addEventListener("DOMContentLoaded", () => {
 				",  ̚ 　̩  ̬  ́  ̀",
 				". / ˈ ˌ ː [ ]",
 			];
+			this.merriamWebsterMaster = [
+				"/ \\ ÷",
+				"' ˈ",
+				", ˌ",
+				"a ā ä",
+				"e ə ᵊ ē",
+				"i ī",
+				"o ō ȯ œ",
+				"u u̇ ü ᵫ ",
+				"k ḵ",
+				"n ⁿ ŋ",
+				"t t̲h̲",
+				"y ʸ",
+			];
 		}
 	}
 	const G = new GlobalManager();
@@ -80,6 +95,16 @@ document.addEventListener("DOMContentLoaded", () => {
 		G.textarea.value = "";
 		const master = (evt.shiftKey) ? G.defaultMaster : G.miniMaster;
 		for (item of master) {
+			const bindings = item.split("");
+			G.textarea.value += item + "\n";
+		}
+		G.textarea.selectionStart = G.textarea.selectionEnd = 0;
+		G.textarea.focus();
+	});
+
+	G.smartIPABndMW.addEventListener("click", (evt) => {
+		G.textarea.value = "";
+		for (item of G.merriamWebsterMaster) {
 			const bindings = item.split("");
 			G.textarea.value += item + "\n";
 		}
